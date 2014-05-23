@@ -1,0 +1,11 @@
+ <?xml version="1.0" ?> 
+  <!DOCTYPE module (View Source for full doctype...)>
+<module name="Checker">
+	<module name="JavadocPackage" />
+	<module name="TreeWalker">
+		<module name="JavadocType" />
+		<module name="JavadocMethod" />
+		<module name="JavadocVariable" />
+		<module name="JavadocStyle" />
+	</module>
+</module>
