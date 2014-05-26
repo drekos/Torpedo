@@ -17,6 +17,7 @@ import org.w3c.dom.NodeList;
 
 import osztalyok.DOM;
 import osztalyok.Jatekosok;
+import javax.swing.JLabel;
 
 /**
  * Rangsort implementáló osztály.
@@ -39,6 +40,7 @@ public class Rangsor extends JFrame {
 	 * A rangsor megjelíntéséért felelős metódus.
 	 * 
 	 * @param args
+	 *            argumentumok
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -71,33 +73,38 @@ public class Rangsor extends JFrame {
 
 		NodeList jatekosok = DOM.getJatekosok();
 
-		Object[][] adatok = new Object[jatekosok.getLength()][4];
+		if (jatekosok != null) {
+			Object[][] adatok = new Object[jatekosok.getLength()][4];
 
-		for (int index = 0; index < jatekosok.getLength(); index++) {
-			Node jatek = jatekosok.item(index);
+			for (int index = 0; index < jatekosok.getLength(); index++) {
+				Node jatek = jatekosok.item(index);
 
-			if (jatek.getNodeType() == Node.ELEMENT_NODE) {
-				Element e = (Element) jatek;
+				if (jatek.getNodeType() == Node.ELEMENT_NODE) {
+					Element e = (Element) jatek;
 
-				String nev = e.getElementsByTagName("nev").item(0)
-						.getTextContent();
-				int kilott = Integer.parseInt(e
-						.getElementsByTagName("kilottHajok").item(0)
-						.getTextContent());
-				int tippek = Integer.parseInt(e
-						.getElementsByTagName("tippekSzama").item(0)
-						.getTextContent());
+					String nev = e.getElementsByTagName("nev").item(0)
+							.getTextContent();
+					int kilott = Integer.parseInt(e
+							.getElementsByTagName("kilottHajok").item(0)
+							.getTextContent());
+					int tippek = Integer.parseInt(e
+							.getElementsByTagName("tippekSzama").item(0)
+							.getTextContent());
 
-				Jatekosok jat = new Jatekosok(nev, kilott, tippek);
+					Jatekosok jat = new Jatekosok(nev, kilott, tippek);
 
-				adatok[index][0] = (Object) jat.getNev();
-				adatok[index][1] = jat.getKilottHajok();
-				adatok[index][2] = jat.getTippekSzama();
-				adatok[index][3] = jat.getTeljesitmeny();
+					adatok[index][0] = (Object) jat.getNev();
+					adatok[index][1] = jat.getKilottHajok();
+					adatok[index][2] = jat.getTippekSzama();
+					adatok[index][3] = jat.getTeljesitmeny();
+				}
 			}
-		}
 
-		table = new JTable(adatok, oszlopNevek);
-		scrollPane.setViewportView(table);
+			table = new JTable(adatok, oszlopNevek);
+			scrollPane.setViewportView(table);
+		} else {
+			JLabel ures = new JLabel("Nincsenek megjelníthető adatok!");
+			scrollPane.setColumnHeaderView(ures);
+		}
 	}
 }

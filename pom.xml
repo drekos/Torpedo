@@ -4,7 +4,7 @@
 	<groupId>hu.unideb.inf.maven</groupId>
 	<artifactId>Bead</artifactId>
 	<version>1.0</version>
-	
+
 	<developers>
 		<developer>
 			<id>Drekos</id>

@@ -232,7 +232,7 @@ public class GUI extends JFrame {
 	/**
 	 * Felhasználói felület megjelenítéséért felelős metódus.
 	 * 
-	 * @param args
+	 * @param args argumentumok
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -537,7 +537,7 @@ public class GUI extends JFrame {
 				if (nincsAktiv.isSelected()) {
 					elsoJatekosTablai.setVisible(false);
 					masodikJatekosTablai.setVisible(false);
-					if (!nyertes && elindult){
+					if (!nyertes && elindult) {
 						kovetkezoJatekos.setVisible(true);
 					}
 					if (elsoJon) {

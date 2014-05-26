@@ -39,16 +39,19 @@ public class DOM {
 			jatekosok = doc.getElementsByTagName("jatekos");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			jatekosok = null;
 		}
 		return jatekosok;
 	}
 
 	/**
-	 * A Jatekosok.xml állomány tartalmát kibővíti a paraméterként megkapott játékosokkal.
+	 * A Jatekosok.xml állomány tartalmát kibővíti a paraméterként megkapott
+	 * játékosokkal.
 	 * 
-	 * @param elso első játékos
-	 * @param masodik második játékos
+	 * @param elso
+	 *            első játékos
+	 * @param masodik
+	 *            második játékos
 	 */
 	public static void jatekosokMentese(Jatekosok elso, Jatekosok masodik) {
 		try {
@@ -63,47 +66,50 @@ public class DOM {
 			doc.appendChild(rootElement);
 
 			int index = 0;
-			for (index = 0; index < jatekosok.getLength(); index++) {
-				Node jatek = jatekosok.item(index);
+			if (jatekosok != null) {
+				for (index = 0; index < jatekosok.getLength(); index++) {
+					Node jatek = jatekosok.item(index);
 
-				if (jatek.getNodeType() == Node.ELEMENT_NODE) {
-					Element e = (Element) jatek;
+					if (jatek.getNodeType() == Node.ELEMENT_NODE) {
+						Element e = (Element) jatek;
 
-					String nev = e.getElementsByTagName("nev").item(0)
-							.getTextContent();
-					int kilott = Integer.parseInt(e
-							.getElementsByTagName("kilottHajok").item(0)
-							.getTextContent());
-					int tippek = Integer.parseInt(e
-							.getElementsByTagName("tippekSzama").item(0)
-							.getTextContent());
-					Jatekosok jat = new Jatekosok(nev, kilott, tippek);
+						String nev = e.getElementsByTagName("nev").item(0)
+								.getTextContent();
+						int kilott = Integer.parseInt(e
+								.getElementsByTagName("kilottHajok").item(0)
+								.getTextContent());
+						int tippek = Integer.parseInt(e
+								.getElementsByTagName("tippekSzama").item(0)
+								.getTextContent());
+						Jatekosok jat = new Jatekosok(nev, kilott, tippek);
 
-					Element jatekos = doc.createElement("jatekos");
-					rootElement.appendChild(jatekos);
+						Element jatekos = doc.createElement("jatekos");
+						rootElement.appendChild(jatekos);
 
-					Attr id = doc.createAttribute("id");
-					id.setValue(String.valueOf(index + 1));
-					jatekos.setAttributeNode(id);
+						Attr id = doc.createAttribute("id");
+						id.setValue(String.valueOf(index + 1));
+						jatekos.setAttributeNode(id);
 
-					Element name = doc.createElement("nev");
-					name.appendChild(doc.createTextNode(jat.getNev()));
-					jatekos.appendChild(name);
+						Element name = doc.createElement("nev");
+						name.appendChild(doc.createTextNode(jat.getNev()));
+						jatekos.appendChild(name);
 
-					Element kilottHajok = doc.createElement("kilottHajok");
-					kilottHajok.appendChild(doc.createTextNode(String
-							.valueOf(jat.getKilottHajok())));
-					jatekos.appendChild(kilottHajok);
+						Element kilottHajok = doc.createElement("kilottHajok");
+						kilottHajok.appendChild(doc.createTextNode(String
+								.valueOf(jat.getKilottHajok())));
+						jatekos.appendChild(kilottHajok);
 
-					Element tippekSzama = doc.createElement("tippekSzama");
-					tippekSzama.appendChild(doc.createTextNode(String
-							.valueOf(jat.getTippekSzama())));
-					jatekos.appendChild(tippekSzama);
+						Element tippekSzama = doc.createElement("tippekSzama");
+						tippekSzama.appendChild(doc.createTextNode(String
+								.valueOf(jat.getTippekSzama())));
+						jatekos.appendChild(tippekSzama);
 
-					Element teljesitmeny = doc.createElement("teljesitmeny");
-					teljesitmeny.appendChild(doc.createTextNode(String
-							.valueOf(jat.getTeljesitmeny())));
-					jatekos.appendChild(teljesitmeny);
+						Element teljesitmeny = doc
+								.createElement("teljesitmeny");
+						teljesitmeny.appendChild(doc.createTextNode(String
+								.valueOf(jat.getTeljesitmeny())));
+						jatekos.appendChild(teljesitmeny);
+					}
 				}
 			}
 

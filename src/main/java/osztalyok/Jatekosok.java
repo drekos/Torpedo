@@ -73,7 +73,7 @@ public class Jatekosok {
 	/**
 	 * Beállítja a játékos tippjeinek számát.
 	 * 
-	 * @param tippekSzama
+	 * @param tippekSzama a játékos tippeinek száma
 	 */
 	public void setTippekSzama(int tippekSzama) {
 		this.tippekSzama = tippekSzama;
